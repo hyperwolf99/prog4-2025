@@ -1,0 +1,27 @@
+### Listado de nombres
+GET http://localhost:3000/nombres
+
+### Listado de nombres con filtro
+GET http://localhost:3000/nombres?filtro=valor
+
+### Detalles de nombre
+GET http://localhost:3000/nombres/1
+
+### Crear nombre
+POST http://localhost:3000/nombres
+Content-Type: application/json
+
+{
+    "nombre": "Carlitos"
+}
+
+### Modificar nombre
+PUT http://localhost:3000/nombres/{id}
+Content-Type: application/json
+
+{
+    "nombre": "Nombre Modificado"
+}
+
+### Quitar nombre
+DELETE http://localhost:3000/nombres/{id}

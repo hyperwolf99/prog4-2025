@@ -23,6 +23,14 @@ app.get('/nombres', (req, res) => {
     res.send(nombres)
 })
 
+app.get('/horarios', (req, res) => {
+    // Responde con objeto JSON
+    res.send({
+        lunes: '18hs',
+        viernes: '19hs',
+    })
+})
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`La aplicación está funcionando en el puerto ${port}`)

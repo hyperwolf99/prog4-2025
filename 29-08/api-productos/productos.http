@@ -1,0 +1,45 @@
+### Listado de productos
+GET http://localhost:3000/productos
+
+### Listado de productos con filtro
+GET http://localhost:3000/productos?producto=p
+
+### Filtrado por precio MINIMO
+GET http://localhost:3000/productos?precioMin=100
+
+### Filtrado por precio MAXIMO
+GET http://localhost:3000/productos?precioMax=500
+
+### Filtrado por CATEGORÍA
+GET http://localhost:3000/productos?categoria=Alimentos
+
+### Filtrado por CANTIDAD
+GET http://localhost:3000/productos?cantidad=10
+
+### Detalles de producto
+GET http://localhost:3000/productos/3
+
+### Crear producto
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+    "nombre": "Coca Cola",
+    "categoria": "Bebidas",
+    "cantidad": 25,
+    "precio": 7
+}
+
+### Modificar producto
+PUT http://localhost:3000/productos/2
+Content-Type: application/json
+
+{
+    "nombre": "Agua mineral",
+    "categoria": "Bebidas",
+    "cantidad": 18,
+    "precio": 1
+}
+
+### Quitar producto
+DELETE http://localhost:3000/productos/4
