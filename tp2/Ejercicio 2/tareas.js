@@ -1,5 +1,6 @@
 import express from 'express';
 import { db } from './db.js';
+import { validarId, validarTarea, verificarValidaciones } from './validaciones.js';
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
     // Verificamos si el parámetro completada está presente
     if (completada !== undefined) {
         // Convertimos el string a 1 o 0
-        const estado = completada === 'true' ? 1 : 0;
+        const estado = completada === true || completada === 'true' ? 1 : 0;
         query += ' WHERE completada = ?';
         params.push(estado);
     }
@@ -35,7 +36,7 @@ router.get('/', async (req, res) => {
 });
 
 // Obtener tarea por ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', validarId(), verificarValidaciones, async (req, res) => {
     // Obtener el ID
     const { id } = req.params;
 
@@ -50,7 +51,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Crear una nueva tarea
-router.post('/', async (req, res) => {
+router.post('/', validarTarea, verificarValidaciones, async (req, res) => {
     const { nombre, completada = 0 } = req.body;
 
     // Verificar duplicado
@@ -73,7 +74,7 @@ router.post('/', async (req, res) => {
 
 
 // Eliminar una tarea por ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', validarId(), verificarValidaciones, async (req, res) => {
     // Obtener el ID
     const { id } = req.params;
 
@@ -89,7 +90,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Actualizar una tarea por ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', validarId(), validarTarea, verificarValidaciones, async (req, res) => {
     // Obtener el ID
     const { id } = req.params;
     const { nombre, completada } = req.body;

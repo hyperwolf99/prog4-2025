@@ -15,8 +15,8 @@ POST http://localhost:3000/tareas
 Content-Type: application/json
 
 {
-    "nombre": "No se",
-    "completada": 0
+    "nombre": "Cualquier cosa2",
+    "completada": false
 }
 
 ### Crear una nueva tarea
@@ -24,18 +24,36 @@ POST http://localhost:3000/tareas
 Content-Type: application/json
 
 {
-    "nombre": "Lavar los platos",
-    "completada": 1
+    "nombre": "Lavar el auto",
+    "completada": true
 }
 
-### Eliminar una tarea por ID
-DELETE http://localhost:3000/tareas/9
-
-### Actualizar una tarea por ID
-PUT http://localhost:3000/tareas/4
+### Crear una nueva tarea
+POST http://localhost:3000/tareas
 Content-Type: application/json
 
 {
-    "nombre": "Limpiar el jardin",
+    "nombre": "Cualquier cosa5",
+    "completada": 1
+}
+
+### Crear una nueva tarea
+POST http://localhost:3000/tareas
+Content-Type: application/json
+
+{
+    "nombre": "Cualquier cosa6",
+    "completada": 0
+}
+
+### Eliminar una tarea por ID
+DELETE http://localhost:3000/tareas/10
+
+### Actualizar una tarea por ID
+PUT http://localhost:3000/tareas/12
+Content-Type: application/json
+
+{
+    "nombre": "",
     "completada": 0
 }

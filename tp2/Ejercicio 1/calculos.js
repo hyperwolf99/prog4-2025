@@ -1,5 +1,6 @@
 import express from 'express';
 import { db } from './db.js';
+import { validarId, verificarValidaciones, validarCalculo } from './validaciones.js';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
 });
 
 // Obtener un cálculo por ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', validarId(), verificarValidaciones, async (req, res) => {
     const { id } = req.params;
     const [rows] = await db.execute('SELECT * FROM calculos WHERE idcalculos = ?', [id]);
     if (rows.length === 0) {
@@ -20,11 +21,8 @@ router.get('/:id', async (req, res) => {
 });
 
 // Crear un nuevo cálculo
-router.post('/', async (req, res) => {
+router.post('/', validarCalculo, verificarValidaciones, async (req, res) => {
     const { base, altura } = req.body;
-    if (!base || !altura) {
-        return res.status(400).json({ error: 'Faltan parámetros base o altura' });
-    }
     const perimetro = 2 * (parseFloat(base) + parseFloat(altura));
     const superficie = parseFloat(base) * parseFloat(altura);
     const [result] = await db.execute(
@@ -44,7 +42,7 @@ router.post('/', async (req, res) => {
 });
 
 // Eliminar un cálculo por ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', validarId(), verificarValidaciones, async (req, res) => {
     const { id } = req.params;
     const [rows] = await db.execute('SELECT * FROM calculos WHERE idcalculos = ?', [id]);
     if (rows.length === 0) {
@@ -55,7 +53,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Actualizar un cálculo por ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', validarId(), validarCalculo, verificarValidaciones, async (req, res) => {
     const { id } = req.params;
     const { base, altura } = req.body;
 
