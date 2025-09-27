@@ -1,0 +1,55 @@
+### Listado de productos
+GET http://localhost:3000/productos
+
+### Listado de productos con filtro
+GET http://localhost:3000/productos?nombre=a
+
+### Listado de productos por cantidad MINIMA
+GET http://localhost:3000/productos?cantidadMin=10
+
+### Listado de productos por cantidad MAXIMA
+GET http://localhost:3000/productos?cantidadMax=50
+
+### Listado de productos por cantidad MINIMA y MAXIMA
+GET http://localhost:3000/productos?cantidadMin=10&cantidadMax=50
+
+### Filtrado por precio MINIMO
+GET http://localhost:3000/productos?precioMin=100
+
+### Filtrado por precio MAXIMO
+GET http://localhost:3000/productos?precioMax=500
+
+### Filtrado por CATEGORÍA
+GET http://localhost:3000/productos?categoria=Alimentos
+
+### Filtrado por CANTIDAD
+GET http://localhost:3000/productos?cantidad=10
+
+### Detalles de producto
+GET http://localhost:3000/productos/9
+
+### Crear producto
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+    "nombre": "Fanta",
+    "categoriaId": 2,
+    "cantidad": 25
+}
+
+### Modificar producto
+PUT http://localhost:3000/productos/7
+Content-Type: application/json
+
+{
+    "nombre": "Pan",
+    "categoriaId": 1,
+    "cantidad": 40
+}
+
+### Quitar producto
+DELETE http://localhost:3000/productos/13
+
+### Consultar por productos de una categoría específica
+GET http://localhost:3000/categorias/2/productos

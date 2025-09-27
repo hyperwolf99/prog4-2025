@@ -1,5 +1,5 @@
 import express from "express";
-import { body, param, validationResult } from "express-validator";
+import { body, param, validationResult, query } from "express-validator";
 
 // Inicializar la aplicación
 const app = express();
@@ -44,14 +44,14 @@ const validarId = () =>
         .withMessage("El ID debe ser un número entero mayor a 0");
 const validarProducto = () => [
     body("nombre")
-        .isAlpha()
+        .isAlpha("es-ES")
         .withMessage("El nombre debe contener solo letras, espacios o guiones")
         .notEmpty()
         .withMessage("El nombre es obligatorio")
         .isLength({ max: 50 })
         .withMessage("El nombre no debe exceder los 50 caracteres"),
     body("categoria")
-        .isAlpha()
+        .isAlpha("es-ES")
         .withMessage(
             "La categoría debe contener solo letras, espacios o guiones"
         )
@@ -82,6 +82,27 @@ const verificarValidaciones = (req, res, next) => {
     next();
 };
 
+const validarFiltros = [
+    query("producto").isAlpha("es-ES").optional(),
+    query("precioMin").isFloat({ min: 0 }).optional(),
+    query("precioMax")
+        .isFloat({ min: 0 })
+        .optional()
+        .custom((value, { req }) => {
+            if (
+                req.query.precioMin &&
+                parseFloat(value) < parseFloat(req.query.precioMin)
+            ) {
+                throw new Error(
+                    "El precioMax no puede ser menor que precioMin"
+                );
+            }
+            return true;
+        }),
+    query("categoria").isAlpha("es-ES").optional(),
+    query("cantidad").isInt({ min: 1 }).optional(),
+];
+
 // ---------------- Ruta principal
 app.get("/", (req, res) => {
     // Responde con string
@@ -89,7 +110,7 @@ app.get("/", (req, res) => {
 });
 
 // <----------------> OBTENER PRODUCTOS <---------------->
-app.get("/productos", (req, res) => {
+app.get("/productos", validarFiltros, verificarValidaciones, (req, res) => {
     // Clonar el arreglo de productos
     let productosFiltrados = [...productos];
 
@@ -105,30 +126,18 @@ app.get("/productos", (req, res) => {
     // Filtrado por precio mínimo
     const precioMin = req.query.precioMin;
     if (precioMin) {
-        if (isNaN(precioMin)) {
-            return res.status(400).json({
-                success: false,
-                message: "El precio mínimo debe ser un número",
-            });
-        }
-        // Verifica que el precio mínimo sea mayor o igual al precio buscado
+        const precioMinimo = Number(precioMin);
         productosFiltrados = productosFiltrados.filter(
-            (p) => p.precio >= precioMin
+            (p) => p.precio >= precioMinimo
         );
     }
 
     // Filtrado por precio máximo
     const precioMax = req.query.precioMax;
     if (precioMax) {
-        if (isNaN(precioMax)) {
-            return res.status(400).json({
-                success: false,
-                message: "El precio máximo debe ser un número",
-            });
-        }
-        // Verifica que el precio máximo sea menor o igual al precio buscado
+        const precioMaximo = Number(precioMax);
         productosFiltrados = productosFiltrados.filter(
-            (p) => p.precio <= precioMax
+            (p) => p.precio <= precioMaximo
         );
     }
 

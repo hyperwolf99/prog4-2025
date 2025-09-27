@@ -1,0 +1,30 @@
+### Consultar todas las categorías
+GET http://localhost:3000/categorias
+
+### Consultar por productos de una categoría específica
+GET http://localhost:3000/categorias/1/productos
+
+### Consultar por productos de una categoría específica
+GET http://localhost:3000/categorias/2/productos
+
+### Consultar por productos de una categoría específica
+GET http://localhost:3000/categorias/3/productos
+
+### Crear categoría
+POST http://localhost:3000/categorias
+Content-Type: application/json
+
+{
+    "nombre": "Bebidas"
+}
+
+### Modificar categoría
+PUT http://localhost:3000/categorias/4
+Content-Type: application/json
+
+{
+    "nombre": "Frutas"
+}
+
+### Quitar categoría
+DELETE http://localhost:3000/categorias/5

@@ -1,0 +1,43 @@
+### Listado de productos
+GET http://localhost:3000/productos
+
+### Listado de productos con filtro
+GET http://localhost:3000/productos?producto=p
+
+### Filtrado por precio MINIMO
+GET http://localhost:3000/productos?precioMin=100
+
+### Filtrado por precio MAXIMO
+GET http://localhost:3000/productos?precioMax=500
+
+### Filtrado por CATEGORÍA
+GET http://localhost:3000/productos?categoria=Alimentos
+
+### Filtrado por CANTIDAD
+GET http://localhost:3000/productos?cantidad=10
+
+### Detalles de producto
+GET http://localhost:3000/productos/8
+
+### Crear producto
+POST http://localhost:3000/productos
+Content-Type: application/json
+
+{
+    "nombre": "Pepsi",
+    "categoria": "Bebidas",
+    "cantidad": 25
+}
+
+### Modificar producto
+PUT http://localhost:3000/productos/8
+Content-Type: application/json
+
+{
+    "nombre": "Detergente",
+    "categoria": "Limpieza",
+    "cantidad": 25
+}
+
+### Quitar producto
+DELETE http://localhost:3000/productos/4
