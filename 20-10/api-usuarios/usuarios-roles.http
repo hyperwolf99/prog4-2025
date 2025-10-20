@@ -1,0 +1,28 @@
+### GET a usuarios-roles
+GET http://localhost:3000/usuarios-roles
+
+### GET a un usuario-rol por ID
+GET http://localhost:3000/usuarios-roles/1
+
+### GET a roles de un usuario
+GET http://localhost:3000/usuarios-roles/usuarios/2/roles/4
+
+### POST asignar rol a usuario
+POST http://localhost:3000/usuarios-roles
+Content-Type: application/json
+
+{
+    "usuario_id": 3,
+    "rol_id": 4,
+    "descripcion": "no se",
+    "nivel": 0
+}
+
+### PUT actualizar rol de usuario
+PUT http://localhost:3000/usuarios-roles/usuarios/2/roles/4
+Content-Type: application/json
+
+{
+    "descripcion": "Descripción actualizada",
+    "nivel": 1
+}

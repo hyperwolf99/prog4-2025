@@ -1,0 +1,33 @@
+### Todos los usuarios
+GET http://localhost:3000/usuarios
+
+### Login usuario
+# @name login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "pichon1234",
+    "password": "Asdf1234"
+}
+
+### Set token
+@token = {{login.response.body.token}}
+
+### Login usuario - contraseña incorrecta
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "pichon1234",
+    "password": "passwordincorrecta"
+}
+
+### Login usuario - usuario incorrecto
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "usuario_inexistente",
+    "password": "Asdf1234"
+}

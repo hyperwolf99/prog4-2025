@@ -1,0 +1,48 @@
+### Todos los usuarios
+GET http://localhost:3000/usuarios
+Authorization: Bearer 
+
+### Usuario por ID
+GET http://localhost:3000/usuarios/1
+
+### Usuarios por rol
+GET http://localhost:3000/usuarios/2/roles
+
+### Asignar rol a usuario
+POST http://localhost:3000/usuarios/2/roles
+Content-Type: application/json
+
+{
+    "rol_id": 3
+}
+
+### Crear nuevo usuario
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+    "username": "pichon1234",
+    "nombre": "calvito",
+    "apellido": "peladito",
+    "password_hash": "Asdf1234",
+    "activo": 0,
+    "rol_id": 4
+}
+
+### Actualizar usuario
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{
+    "username": "calvin123",
+    "nombre": "Calvo",
+    "apellido": "Pelado",
+    "password_hash": "123456",
+    "activo": 1
+}
+
+### Eliminar usuario
+DELETE http://localhost:3000/usuarios/1
+
+### Quitar rol a usuario
+DELETE http://localhost:3000/usuarios/2/roles/3

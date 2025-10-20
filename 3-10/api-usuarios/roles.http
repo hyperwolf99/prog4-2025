@@ -1,0 +1,24 @@
+### Todos los roles
+GET http://localhost:3000/roles
+
+### Rol por ID
+GET http://localhost:3000/roles/1
+
+### Crear nuevo rol
+POST http://localhost:3000/roles
+Content-Type: application/json
+
+{
+    "nombre": "escritor"
+}
+
+### Actualizar rol
+PUT http://localhost:3000/roles/1
+Content-Type: application/json
+
+{
+    "nombre": "operario"
+}
+
+### Eliminar rol
+DELETE http://localhost:3000/roles/1
